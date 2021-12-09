@@ -1,0 +1,13 @@
+{
+  "BASE": {
+    "logging_level": "info"
+  },
+  "SDP_REST_HEAD": {
+    "sdp_rest_api_host_protocol": "http",
+    "sdp_rest_api_host": "psearch-api-ecs-search.sdp.lgli194.sdp-az-poc.org",
+    "sdp_rest_api_port": "80",
+    "sdp_rest_api_key": "dXNlci1ENkIyQjg6NTE3QTkyQTMxNEQw",
+    "sdp_auth_credentials": "user-E63DFC:C55FC9B0D454",
+    "sdp_index_to_search": "ecsIndex6"
+  }
+}
