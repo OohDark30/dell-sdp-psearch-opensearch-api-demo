@@ -85,7 +85,7 @@ if __name__ == "__main__":
 
         openSearchClient = OpenSearch(
             hosts=[sdp_host],
-            http_compress=True,
+            http_compress=False,
             use_ssl=False
         )
 

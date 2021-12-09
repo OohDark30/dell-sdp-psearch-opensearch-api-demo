@@ -9,7 +9,7 @@ dell-sdp-psearch-opensearch-api-demo will do the following:
 2. Use the OpenSearch API Python client here: https://github.com/opensearch-project/opensearch-py to peform the following:
 - Create an OpenSearch client
 - Get Cluster Info and State
-- Retrived information on the configured index
+- Retrieve information on the configured index
 - Perform a basic search of the index
 
 For more information, please see the [wiki](https://github.com/OohDark30/dell-sdp-psearch-opensearch-api-demo/wiki)
