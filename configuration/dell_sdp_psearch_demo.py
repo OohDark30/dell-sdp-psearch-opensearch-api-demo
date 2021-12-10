@@ -61,8 +61,8 @@ class DellSDPConfiguration(object):
             raise InvalidConfigurationException("The DELL SDP Rest API Endpoint Host is not configured in the module configuration")
         if not self.sdp_rest_api_port:
             raise InvalidConfigurationException("The DELL SDP Rest API Endpoint Port is not configured in the module configuration")
-        if not self.sdp_rest_api_key:
-            raise InvalidConfigurationException("The DELL SDP Rest API key is not configured in the module configuration")
+        # if not self.sdp_rest_api_key:
+        #     raise InvalidConfigurationException("The DELL SDP Rest API key is not configured in the module configuration")
         if not self.sdp_auth_credentials:
             raise InvalidConfigurationException("The DELL SDP Rest API credentials are not configured in the module configuration")
         if not self.sdp_index_to_search:
