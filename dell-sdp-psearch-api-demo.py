@@ -1,26 +1,15 @@
 """
 DELL SDP P-Search API Demo.
 """
-import base64
 import json
-import subprocess
-import urllib
-import requests
-from bs4 import BeautifulSoup
-import sdp.sdp
 from configuration.dell_sdp_psearch_demo import DellSDPConfiguration
 from logger import sdp_logger
 from sdp.sdp import SDPApi
-import errno
-import getpass
 import os
 import traceback
-import signal
-import time
 import logging
-import re
-import xml.etree.ElementTree as ET
 from opensearchpy import OpenSearch
+import pprint
 
 # Constants
 MODULE_NAME = "SDP_PSEARCH_API_DEMO_Module"  # Module Name
@@ -94,12 +83,21 @@ if __name__ == "__main__":
 
         # Grab cluster information
         info_json = _sdpAPI.get_sdp_cluster_info()
+        print(MODULE_NAME + "::__main__::SDP P-Search Cluster Info:\r\n")
+        pp1 = pprint.PrettyPrinter(width=41, indent=4, compact=True)
+        pp1.pprint(info_json)
 
         # Get Cluster State
         state_json = _sdpAPI.get_sdp_cluster_state()
+        print(MODULE_NAME + "::__main__::SDP P-Search Cluster State:\r\n")
+        pp2 = pprint.PrettyPrinter(width=41, indent=4, compact=True)
+        pp2.pprint(state_json)
 
         # Get our index to search
         indices_json = _sdpAPI.get_sdp_indices(_configuration.sdp_index_to_search)
+        print(MODULE_NAME + "::__main__::SDP P-Search Cluster Index Detail for Index: " + _configuration.sdp_index_to_search + "\r\n")
+        pp3 = pprint.PrettyPrinter(width=41, indent=4, compact=True)
+        pp3.pprint(indices_json)
 
         # Do a search of the index
         q = 'Waltham'
@@ -113,6 +111,9 @@ if __name__ == "__main__":
             }
         }
         search_results = _sdpAPI.search_sdp_index(query, _configuration.sdp_index_to_search)
+        print(MODULE_NAME + "::__main__::SDP P-Search Search Results Against Index: " + _configuration.sdp_index_to_search + "\r\n")
+        pp4 = pprint.PrettyPrinter(indent=4)
+        pp4.pprint(search_results)
 
     except Exception as e:
         print(MODULE_NAME + '__main__::The following unexpected error occurred: '
