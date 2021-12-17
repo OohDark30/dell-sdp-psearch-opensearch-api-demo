@@ -1,6 +1,7 @@
 """
 DELL SDP P-Search API Demo.
 """
+import datetime
 import json
 from configuration.dell_sdp_psearch_demo import DellSDPConfiguration
 from logger import sdp_logger
@@ -99,21 +100,57 @@ if __name__ == "__main__":
         pp3 = pprint.PrettyPrinter(width=41, indent=4, compact=True)
         pp3.pprint(indices_json)
 
-        # Do a search of the index
-        q = 'Waltham'
+        # Do a search of the index using a date range and a meta-data attribute
         query = {
-            'size': 5,
-            'query': {
-                'multi_match': {
-                    'query': q,
-                    'fields': ['objectName']
+            "query": {
+                "bool": {
+                    "must": [],
+                    "filter": [
+                        {
+                            "match_all": {}
+                        },
+                        {
+                            "match_phrase": {
+                                "objectMetadata.usrMd.x-amz-meta-instrument": "instrument7"
+                            }
+                        },
+                        {
+                            "range": {
+                                "objectMetadata.sysMd.size": {
+                                    "gte": 400000,
+                                    "lt": 699999
+                                }
+                            }
+                        },
+                        {
+                            "match_phrase": {
+                                "objectMetadata.sysMd.createTime": "2021-12-16T22:05:04.000Z"
+                            }
+                        },
+                        {
+                            "range": {
+                                "objectMetadata.sysMd.createTime": {
+                                    "gte": "2021-12-16T16:46:14.733Z",
+                                    "lte": "2021-12-17T16:46:14.733Z",
+                                    "format": "strict_date_optional_time"
+                                }
+                            }
+                        }
+                    ],
+                    "should": [],
+                    "must_not": []
                 }
             }
         }
+
         search_results = _sdpAPI.search_sdp_index(query, _configuration.sdp_index_to_search)
-        print(MODULE_NAME + "::__main__::SDP P-Search Search Results Against Index: " + _configuration.sdp_index_to_search + "\r\n")
-        pp4 = pprint.PrettyPrinter(indent=4)
-        pp4.pprint(search_results)
+        print(MODULE_NAME + "::__main__::SDP P-Search Search Results Against Index: " + _configuration.sdp_index_to_search )
+        print("\tObject Keys Returned from Index " + _configuration.sdp_index_to_search +": ")
+
+        # Do a little basic parsing to pull out and print the object key names
+        search_results_hits = search_results['hits']['hits']
+        for hit in search_results_hits:
+            print("\t\tObject Key: " + hit['_source']['objectMetadata']['sysMd']['objectName'])
 
     except Exception as e:
         print(MODULE_NAME + '__main__::The following unexpected error occurred: '
