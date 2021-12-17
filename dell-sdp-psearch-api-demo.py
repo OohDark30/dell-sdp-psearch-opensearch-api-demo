@@ -96,9 +96,9 @@ if __name__ == "__main__":
 
         # Get our index to search
         indices_json = _sdpAPI.get_sdp_indices(_configuration.sdp_index_to_search)
-        print(MODULE_NAME + "::__main__::SDP P-Search Cluster Index Detail for Index: " + _configuration.sdp_index_to_search + "\r\n")
-        pp3 = pprint.PrettyPrinter(width=41, indent=4, compact=True)
-        pp3.pprint(indices_json)
+        #print(MODULE_NAME + "::__main__::SDP P-Search Cluster Index Detail for Index: " + _configuration.sdp_index_to_search + "\r\n")
+        #pp3 = pprint.PrettyPrinter(width=41, indent=4, compact=True)
+        #pp3.pprint(indices_json)
 
         # Do a search of the index using a date range and a meta-data attribute
         query = {
